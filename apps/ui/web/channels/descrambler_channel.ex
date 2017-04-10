@@ -6,7 +6,16 @@ defmodule Ui.DescramblerChannel do
   end
 
   def handle_in("descramble", %{"body" => scrambled}, socket) do
-    :rpc.call(Node.self(), Descrambler, :descramble, [scrambled, self()])
+    selected_node =
+      Ui.NodeSelector.get_node(Node.list, "descrambler")
+      |> IO.inspect
+
+    :rpc.call(
+      selected_node,
+      Descrambler,
+      :descramble,
+      [scrambled, self()]
+    )
     # Descrambler.descramble(scrambled, self())
     {:noreply, socket}
   end
