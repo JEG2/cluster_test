@@ -1,0 +1,4 @@
+-name <%= release_name %>@${INTERNAL_IP}
+-setcookie ${NODE_COOKIE}
+-smp auto
+-config /etc/cluster.config
